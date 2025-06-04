@@ -1,0 +1,5 @@
+- name: configure mongodb component
+  become: yes
+  hosts: mongodb
+  roles:              #loads data in current working directory
+  - mongodb
