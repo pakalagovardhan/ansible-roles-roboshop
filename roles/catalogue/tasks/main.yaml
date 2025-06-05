@@ -21,6 +21,7 @@
 - name: check products loaded or not
   ansible.builtin.command: mongosh --host mongodb.dev1407.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: catalogue_output
+  ignore_errors: true
 
 - name: print catalogue output
   ansible.builtin.debug:
@@ -29,6 +30,7 @@
 - name: load products
   ansible.builtin.shell: mongosh --host mongodb.dev1407.site < /app/db/master-data.js
   when: catalogue_output.stdout | int < 0
+  ignore_errors: true
 
 - name: systemd setup
   include_role:
